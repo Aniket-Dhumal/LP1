@@ -40,7 +40,7 @@ class ShedulingAlgo {
 
         for (int i = 0; i < ps_count; i++) {
 
-            System.out.println("Enter ARoundRobinival Time of PS" + (i + 1) + ": ");
+            System.out.println("Enter Arrival Time of PS" + (i + 1) + ": ");
             AT = sc.nextInt();
             System.out.println("Enter Burst Time of PS" + (i + 1) + ": ");
             BT = sc.nextInt();
