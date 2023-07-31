@@ -1,13 +1,13 @@
 import java.util.*;
  
 public class SJF {
-public static void main(String args[])
+public static void main(String args[])// 8888449799 9370021431
 {
 Scanner sc = new Scanner(System.in);
 System.out.println ("enter no of process:");
 int n = sc.nextInt();
 int pid[] = new int[n];
-int at[] = new int[n]; // at means arrival time
+int at[] = new int[n]; // at means aRoundRobinival time
 int bt[] = new int[n]; // bt means burst time
 int ct[] = new int[n]; // ct means complete time
 int ta[] = new int[n]; // ta means turn around time
@@ -18,7 +18,7 @@ float avgwt=0, avgta=0;
  
 for(int i=0;i<n;i++)
 {
-System.out.println ("enter process " + (i+1) + " arrival time:");
+System.out.println ("enter process " + (i+1) + " aRoundRobinival time:");
 at[i] = sc.nextInt();
 System.out.println ("enter process " + (i+1) + " brust time:");
 bt[i] = sc.nextInt();
@@ -34,7 +34,7 @@ break;
 for (int i=0; i<n; i++)
 {
 /*
-* If i'th process arrival time <= system time and its flag=0 and burst<min
+* If i'th process aRoundRobinival time <= system time and its flag=0 and burst<min
 * That process will be executed first
 */
 if ((at[i] <= st) && (f[i] == 0) && (bt[i]<min))
@@ -43,7 +43,7 @@ min=bt[i];
 c=i;
 }
 }
-/* If c==n means c value can not updated because no process arrival time< system time so we increase the system time */
+/* If c==n means c value can not updated because no process aRoundRobinival time< system time so we increase the system time */
 if (c==n)
 st++;
 else
@@ -56,7 +56,7 @@ f[c]=1;
 tot++;
 }
 }
-System.out.println("\npid  arrival brust  complete turn waiting");
+System.out.println("\npid  aRoundRobinival brust  complete turn waiting");
 for(int i=0;i<n;i++)
 {
 avgwt+= wt[i];
