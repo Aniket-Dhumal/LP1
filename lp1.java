@@ -44,21 +44,37 @@ class ShedulingAlgo {
             AT = sc.nextInt();
             System.out.println("Enter Burst Time of PS" + (i + 1) + ": ");
             BT = sc.nextInt();
+            System.out.println("Enter Priority of PS"+(i+1)+" : ");
+            int PRI = sc.nextInt();
            
 
             PID = ++pCount;
 
-            Processes[i] = new ShedulingAlgo(AT, BT, PID);
+            Processes[i] = new ShedulingAlgo(AT, BT, PID,PRI);
 
         }
         sc.close();
 
-        
+        System.out.println("------------- FCFS -------------");
+        FCFS();
+        System.out.println();
+        System.out.println();
+        System.out.println("------------- SJF -------------");
+        SJF();
+        System.out.println();
+        System.out.println();
+        System.out.println("------------- Round Robin -------------");
         RoundRobin();
+        System.out.println();
+        System.out.println();
+        System.out.println("------------- Priority -------------");
+        Priority();
 
     }
 
     void FCFS() {
+    	avg_TAT = 0;
+    	avg_WT = 0;
 
         // sorting - AT
 
@@ -81,10 +97,18 @@ class ShedulingAlgo {
 
             Processes[i].CT = prev_CT + Processes[i].BT;
             prev_CT = Processes[i].CT;
+            
+            if(Processes[i].AT <= Processes[i].CT) {
+            	Processes[i].TAT = Processes[i].CT + Processes[i].AT;
+                Processes[i].WT = Processes[i].TAT + Processes[i].BT;
+            }
+            
+            else {
 
             Processes[i].TAT = Processes[i].CT - Processes[i].AT;
 
             Processes[i].WT = Processes[i].TAT - Processes[i].BT;
+            }
         }
 
         System.out.println("  PID \t AT \t BT \t CT \t TAT \t WT ");
@@ -104,7 +128,8 @@ class ShedulingAlgo {
     }
 
     void SJF() {
-
+    	avg_TAT = 0;
+    	avg_WT = 0;
         // sorting - AT
 
         int prev_CT = 0;
@@ -160,7 +185,7 @@ class ShedulingAlgo {
 
             Processes[i].CT = prev_CT + Processes[i].BT;
 
-            System.out.println("CT: " + Processes[i].CT);
+           // System.out.println("CT: " + Processes[i].CT);
 
             for (int j = i + 1; j < ps_count; j++) {
 
@@ -199,7 +224,8 @@ class ShedulingAlgo {
     }
 
     void Priority() {
-
+    	avg_TAT = 0;
+    	avg_WT = 0;
         boolean PTerminated[] = new boolean[ps_count];
 
         for (int i = 0; i < ps_count; i++) {
@@ -295,8 +321,10 @@ class ShedulingAlgo {
     }
 
     void RoundRobin() {
-
-        int time_slice = 10;
+         
+    	avg_TAT = 0;
+    	avg_WT = 0;
+        int time_slice = 2;
         int prev_CT = 0;
 
         int PsBT[] = new int[ps_count];
